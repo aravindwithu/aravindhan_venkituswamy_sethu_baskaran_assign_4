@@ -32,11 +32,14 @@ private BufferedReader file; // BufferedReader object to read from file.
 	* @return String - read file line string or message related to file activity.
 	*/
 	public String readLine(boolean read){
+		// Add sync ===
+
 		try{
 			if(isFileOpen){
 				if(read){
 					return file.readLine();
-				}else{
+				}
+				else{
 					closeFile();
 					return "file closed sucessfully";
 				}

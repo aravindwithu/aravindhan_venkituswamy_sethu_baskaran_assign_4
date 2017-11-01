@@ -1,6 +1,14 @@
 package wordTree.threadMgmt;
 
 
-public class DeleteThread{
+public class DeleteThread implements Runnable{
+	
+	public DeleteThread(){
+
+	}
+	
+	public void run(){
+
+	}
 
 }

@@ -25,7 +25,6 @@ public class Driver {
 		}
 		String[] arg3 = args[3].split(" ");
 		if(arg3.length != Integer.parseInt(args[2])){
-			System.out.println(arg3.length + " Arr zise  ++ "+ Integer.parseInt(args[2]));
 			return false;
 		}
 		String arg4 = "01234";
@@ -42,6 +41,13 @@ public class Driver {
 			System.err.println("Please specify arguments.");
 			System.exit(1);
 		}
-				
+		String inputFile = args[0];
+		String outputFile = args[1];
+		final int NUM_THREADS = Integer.parseInt(args[2]);
+		
+		FileProcessor fileProcessor = new FileProcessor(inputFile);				 
+		Results results = new Results(outputFile);
+		CreateWorkers workers = new CreateWorkers(fileProcessor,results);
+		workers.startPopulateWorkers(NUM_THREADS);
 	}
 }
