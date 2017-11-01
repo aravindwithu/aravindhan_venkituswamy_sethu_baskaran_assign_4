@@ -11,7 +11,10 @@ ant -buildfile src/build.xml all
 -----------------------------------------------------------------------
 ## To run by specifying arguments from command line 
 ## We will use this to run your code
-ant -buildfile src/build.xml run -Darg0=input.txt -Darg1=output.txt
+ant -buildfile src/build.xml run -Darg0=input.txt -Darg1=output.txt -Darg2=NUM_THREADS
+-Darg3="XYZ1 XYZ2 XYZ3" -Darg4=DEBUG_VALUE
+
+ant -buildfile src/build.xml run -Darg0=input.txt -Darg1=output.txt -Darg2=1 -Darg3="XYZ1 XYZ2 XYZ3" -Darg4=2
 
 -----------------------------------------------------------------------
 

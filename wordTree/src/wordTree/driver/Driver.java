@@ -12,6 +12,26 @@ public class Driver {
 
 	// Command line checks
 	private static boolean argCheck(String[] args){
+		if(args[0].equals("${arg0}") || args[0].equals("") || args[1].equals("${arg1}") || args[1].equals("") || args.length != 5){
+			return false;
+		}
+		String threadCheck = "123";
+		if(args[2].equals("${arg2}") || args[2].equals("") || args[2].length() != 1 || (!threadCheck.contains(args[2])) ){
+			return false;
+		}
+		// Can delete words be empty???????
+		if(args[3].equals("${arg3}") || args[3].equals("")){
+			return false;
+		}
+		String[] arg3 = args[3].split(" ");
+		if(arg3.length != Integer.parseInt(args[2])){
+			System.out.println(arg3.length + " Arr zise  ++ "+ Integer.parseInt(args[2]));
+			return false;
+		}
+		String arg4 = "01234";
+		if(args[4].equals("${arg4}") || args[4].equals("") || args[4].length() != 1 || (!arg4.contains(args[4]))){
+			return false;
+		}
 		return true;
 	}
 

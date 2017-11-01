@@ -6,15 +6,19 @@ import java.util.Arrays;
 
 public class Node{
 
-	private int b_number;
-	private ArrayList<String> courseNames;
+	private String word;
+	private int wordLength;
+	private int numOfOccurence;
 	private Node leftChild;
 	private Node rightChild;
-	private ArrayList<Node> listenerNodes;
 
-	public Node(){
-		
+	public Node(String newWord){
+		word = newWord;
+		wordLength = word.length();
+		numOfOccurence = 1;
+		leftChild = null;
+		rightChild = null;		
 	}
 
-	
+		
 }
