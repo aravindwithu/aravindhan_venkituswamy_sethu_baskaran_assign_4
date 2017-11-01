@@ -2,42 +2,74 @@ package wordTree.util;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 
 public class FileProcessor{
-
-	private BufferedReader br = null;
-	private FileReader fr = null;
-
-	public FileProcessor(String fileName){
+private BufferedReader file; // BufferedReader object to read from file.
+	private boolean isFileOpen = false;//  to maintain whether the file is open or not state.
+	/**
+	* FileProcessor constructor to intialize FileProcessor class.
+	* Requires input file course to intialize the BufferedReader object.
+	* Exception is thrown if given file does not exits.
+	* @param filename to open the file reader object.
+	*/
+	public FileProcessor(String filename){
 		try{
-			fr = new FileReader(fileName);
-			br = new BufferedReader(fr);
+			file = new BufferedReader(new FileReader(filename));
+			isFileOpen = true;
 		}
-		catch(IOException e){
-			e.printStackTrace();
-			System.exit(0);
+		catch (Exception ex)
+	  	{
+	    	System.err.println(ex.getMessage());
+	    	ex.printStackTrace();
+	    	System.exit(0);
+	  	}
+	}
+	/**
+	* readLine method.
+	* Reads the line from file.
+	* If read is true then readLine() is returned else file object is closed.
+	* @param read - If read is true then readLine() is returned else file object is closed. 
+	* @return String - read file line string or message related to file activity.
+	*/
+	public String readLine(boolean read){
+		try{
+			if(isFileOpen){
+				if(read){
+					return file.readLine();
+				}else{
+					closeFile();
+					return "file closed sucessfully";
+				}
+			}else{
+				return "file is in closed state";
+			}
 		}
+		catch (Exception ex)
+	  	{
+	    	System.err.println(ex.getMessage());
+	    	ex.printStackTrace();
+	    	System.exit(0);
+	    	return null;
+	  	}
 	}
 
-	// Reads a file by line
-	public String readLine(){
+	/**
+	* closeFile method.
+	* closes the file object.
+	*/
+	private void closeFile(){
 		try{
-			return br.readLine();	
-		}catch(IOException e){
-			e.printStackTrace();
-			System.exit(0);
-			return null;
+			file.close();
+			isFileOpen = false;
 		}
+		catch (Exception ex)
+	  	{
+	    	System.err.println(ex.getMessage());
+	    	ex.printStackTrace();
+	    	System.exit(0);
+	  	}
+	  	finally{
+	  		file = null;
+	  	}
 	}
-
-	// Closes the buffered and filereader streams
-	public void closeFile(){
-		try{
-			fr.close();
-			br.close();	
-		}
-		catch(IOException ignore){}		
-	}
-	
 }
