@@ -35,6 +35,22 @@ public class Node{
 	}
 
 	/**
+	* getNumOfOccurence method.
+	* @return int (numOfOccurence)
+	*/
+	public int getNumOfOccurence(){
+		return numOfOccurence;
+	}
+
+	/**
+	* getWordLength method.
+	* @return int (wordLength)
+	*/
+	public int getWordLength(){
+		return wordLength;
+	}
+
+	/**
 	* incrementCount method.
 	* increments numOfOccurence by 1. 
 	*/

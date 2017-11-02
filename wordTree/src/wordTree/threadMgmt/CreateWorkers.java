@@ -30,6 +30,7 @@ public class CreateWorkers{
 		for(int i = 0; i < NUM_THREADS; i++ ){
 			thread[i].start();
 		}
+		
 		try{
 			for(int i = 0; i < NUM_THREADS; i++ ){
 				thread[i].join();

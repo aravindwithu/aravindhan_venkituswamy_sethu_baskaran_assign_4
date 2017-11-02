@@ -49,7 +49,7 @@ public class TreeBuilder {
             return root;
         }
         
-        if(newNode.getWord() == root.getWord()){
+        if(newNode.getWord().equals(root.getWord())){
         	root.incrementCount();
         	return root;
         }else{
@@ -90,7 +90,7 @@ public class TreeBuilder {
 			printNodes(currentNode.getLeftChild()
 				//, result
 				);
-			System.out.println(currentNode.getWordID() + ":" + currentNode.getWord());
+			System.out.println(currentNode.getWordID() + ":" + currentNode.getWord() + "->" + currentNode.getNumOfOccurence());
 			//String resultStr = currentNode.getWordID() + ":" + currentNode.getWord();
 			//result.storeNewResult(resultStr);			
 			printNodes(currentNode.getRightChild()
