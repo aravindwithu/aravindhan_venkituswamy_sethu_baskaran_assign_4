@@ -1,18 +1,16 @@
 package wordTree.myTree;
 
-import java.util.Collections;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Node{
 
+	private int wordID;
 	private String word;
 	private int wordLength;
 	private int numOfOccurence;
 	private Node leftChild;
 	private Node rightChild;
 
-	public Node(String newWord){
+	public Node(int wordIDIn, String newWord){
+		wordID = wordIDIn;
 		word = newWord;
 		wordLength = word.length();
 		numOfOccurence = 1;
@@ -20,5 +18,59 @@ public class Node{
 		rightChild = null;		
 	}
 
-		
+	/**
+	* getWord method.
+	* @return int (word)
+	*/
+	public String getWord(){
+		return word;
+	}
+
+	/**
+	* getWordID method.
+	* @return int (wordID)
+	*/
+	public int getWordID(){
+		return wordID;
+	}
+
+	/**
+	* incrementCount method.
+	* increments numOfOccurence by 1. 
+	*/
+	public void incrementCount(){
+		numOfOccurence++;
+	}
+
+	/**
+	* getLeftChild method.
+	* @return Node (leftChild node)
+	*/
+	public Node getLeftChild(){
+		return leftChild;
+	}
+
+	/**
+	* setLeftChild method.
+	* @param nodeIn (sets the leftChild)
+	*/
+	public void setLeftChild(Node nodeIn){
+		leftChild = nodeIn;
+	}
+
+	/**
+	* getRightChild method.
+	* @return Node (rightChild node)
+	*/
+	public Node getRightChild(){
+		return rightChild;
+	}
+
+	/**
+	* setLeftChild method.
+	* @param nodeIn (sets the rightChild)
+	*/
+	public void setRightChild(Node nodeIn){
+		rightChild = nodeIn;
+	}
 }

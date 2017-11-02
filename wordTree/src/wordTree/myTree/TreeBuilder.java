@@ -3,85 +3,65 @@ package wordTree.myTree;
 import java.util.ArrayList;
 
 public class TreeBuilder {
+	private Node root;
+	private int wordCount;
 
-	private Node rootNode;
-
+	/**
+	* TreeBuilder constructor to intialize TreeBuilder class.
+	* Intializes the root object for original, backup 1 and backup 2 trees to null.
+	*/
 	public TreeBuilder(){
-		this.rootNode = null;
+		root = null;
+		wordCount = 0;
 	}
 
-	// Can be Reused
+	/**
+	* insertNode public method.
+	* To create and clone respective Nodes and to insert the same in BST structure.
+	* BST - Binary Search Tree.
+	* @param newWord.
+	*/
+	public void insertNode(String newWord){
+		try{
+			Node newNode = new Node(wordCount,newWord);
+			root = insertNode(root, newNode);
+			wordCount++;
+		}
+		catch(Exception ex){
+			System.err.println(ex.getMessage());// prints the error message.
+	    	ex.printStackTrace();// prints stack trace.
+	    	System.exit(0);
+		}
+	}
 
-	// // Gets the root node of the tree
-	// public Node getRoot(){
-	// 	return this.rootNode;
-	// }
+	/**
+	* insertNode private method.
+	* To creates BST structure with given new node the root node.
+	* BST - Binary Search Tree.
+	* @param root of the respective tree.
+	* @param newNode created or cloned node.
+	* @see http://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/
+	* @return Node (root);
+	*/
+	private Node insertNode(Node root, Node newNode){
+        if (root == null) {
+            root = newNode;
+            return root;
+        }
+        
+        if(newNode.getWord() == root.getWord()){
+        	root.incrementCount();
+        	return root;
+        }else{
+        	if (newNode.getWordID() < root.getWordID()){
+	            root.setLeftChild(insertNode(root.getLeftChild(), newNode));
+	        }
+	    	else if (newNode.getWordID() > root.getWordID()){
+	            root.setRightChild(insertNode(root.getRightChild(), newNode));
+	        }
+	        return root;
+        }
+	}
 
-	// // Adds the node to the tree
-	// public Node addNode(Node node){
-	// 	if(rootNode == null){
-	// 		rootNode = node;
-	// 		return node;
-	// 	}
-	// 	Node currentNode = rootNode;
- //        Node parentNode = currentNode;
-	// 	int number = node.getNumber();
-	// 	while (true) {
- //            if (parentNode.getNumber() > number) {
- //                currentNode = parentNode.getleftChild();
- //                if (currentNode == null) {
- //                    parentNode.setleftChild(node);
- //                    return node;
- //                }
- //            } else {
- //                currentNode = parentNode.getrightChild();
- //                if (currentNode == null) {
- //                    parentNode.setrightChild(node);
- //                    return node;
- //                }
- //            }
- //            parentNode = currentNode;
- //        }
-		
-	// }
 
-	// // Search for a node
-	// public Node getNode(int number){
-	// 	Node currentNode = rootNode;
-		
-	// 	while(currentNode != null){
-	// 		int currentNumber = currentNode.getNumber();
-	// 		if(currentNumber == number){
-	// 			return currentNode;
-	// 		}
-	// 		else if(currentNumber < number){
-	// 			currentNode = currentNode.getrightChild();
-	// 		}
-	// 		else{
-	// 			currentNode = currentNode.getleftChild();
-	// 		}
-	// 	}
-	// 	return null;
-	// }
-
-	// // Check if the node exists in the tree
-	// public boolean checkNodeexists(int number){
-	// 	Node newNode = getNode(number);
-	// 	if(newNode == null){
-	// 		return false;
-	// 	}
-	// 	return true;
-	// }
-
-	// // Prints the tree using inorder traversal
-	// public void printNodes(Results res,Node node){
-	// 	if(node == null){
-	// 		return;
-	// 	}
-	// 	printNodes(res,node.getleftChild());
-	// 	String num = String.valueOf(node.getNumber()) + ": ";
-	// 	String list = String.join(", ",node.getCourses());
-	// 	res.writeToFile(num + list);
-	// 	printNodes(res,node.getrightChild());
-	// }
 }
