@@ -21,7 +21,7 @@ public class TreeBuilder {
 	* BST - Binary Search Tree.
 	* @param newWord.
 	*/
-	public void insertNode(String newWord){
+	public synchronized void insertNode(String newWord){
 		try{
 			Node newNode = new Node(wordCount,newWord);
 			root = insertNode(root, newNode);

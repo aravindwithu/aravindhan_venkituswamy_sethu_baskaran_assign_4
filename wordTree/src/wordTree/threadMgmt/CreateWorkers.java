@@ -3,31 +3,56 @@ package wordTree.threadMgmt;
 import wordTree.store.Results;
 import wordTree.util.FileProcessor;
 import wordTree.myTree.TreeBuilder;
+import wordTree.threadMgmt.PopulateThread;
+import java.util.ArrayList;
 
 public class CreateWorkers{
-	private FileProcessor fileProcessor;
+	private FileProcessor file;
 	private Results results;
 	private TreeBuilder tree;
-	// private Runnable[] runnable;
+	private PopulateThread populateThread[];
 
-	public CreateWorkers(FileProcessor file,Results results){
-		fileProcessor = file;
+	public CreateWorkers(FileProcessor fileIn,Results results){
+		file = fileIn;
 		results = results;
 		tree = new TreeBuilder();
 	}
 
 	public void startPopulateWorkers(int NUM_THREADS){
 		// Create threads
-		/*for(int i = 1; i <= NUM_THREADS; i++ ){
-			new PopulateThread("Thread-"+i, fileProcessor);
-		}*/
-		tree.insertNode("test");
-		tree.insertNode("word");
-		tree.insertNode("inserted");
-		tree.insertNode("and");
-		tree.insertNode("printed");
+		populateThread = new PopulateThread[NUM_THREADS];
 
-		tree.printNodes();
+		for(int i = 0; i < NUM_THREADS; i++ ){
+			populateThread[i] = new PopulateThread("Thread_"+ i, tree);
+		}
+
+		int temp_Num = 1;
+		String line;
+
+	    while ((line = file.readLine(true)) != null)
+	    {
+	    	if(!line.equals("")){
+	    		if(temp_Num > NUM_THREADS){
+	    			temp_Num = 1;
+	  			}
+	    		if(temp_Num <= NUM_THREADS){
+	    			 populateThread[temp_Num-1].start(line);
+	    		}
+	    		temp_Num++;
+	    	}
+	    }
+	    
+	    /*for(int i = 0; i < NUM_THREADS; i++ ){
+			runnable[i].start();
+		}*/
+
+	    tree.printNodes();
+
+
+		/*for(int i = 0; i < NUM_THREADS; i++ ){
+			runnable.add(new PopulateThread("Thread_"+i, fileProcessor));
+		}*/
+
 	}
 
 	public void startDeleteWorkers(int NUM_THREADS){
