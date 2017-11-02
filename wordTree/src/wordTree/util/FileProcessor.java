@@ -39,6 +39,7 @@ private BufferedReader file; // BufferedReader object to read from file.
 	* readLine method.
 	* Reads the line from file.
 	* If read is true then readLine() is returned else file object is closed.
+	* The readLine method called by the threads to read line from file is synchronized.
 	* @param read - If read is true then readLine() is returned else file object is closed. 
 	* @return String - read file line string or message related to file activity.
 	*/

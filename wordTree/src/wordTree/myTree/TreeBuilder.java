@@ -19,6 +19,7 @@ public class TreeBuilder {
 	* insertNode public method.
 	* To create and clone respective Nodes and to insert the same in BST structure.
 	* BST - Binary Search Tree.
+	* The public insertNode method called by the threads to insert word is synchronized.
 	* @param newWord.
 	*/
 	public synchronized void insertNode(String newWord){

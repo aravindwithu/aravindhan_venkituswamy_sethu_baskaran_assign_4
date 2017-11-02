@@ -13,35 +13,41 @@ public class CreateWorkers{
 	private Thread thread[];
 
 	public CreateWorkers(FileProcessor fileIn, Results results){
+		// Required objects are assigned/intialized in the costructor.
 		file = fileIn;
 		results = results;
 		tree = new TreeBuilder();
 	}
 
 	public void startPopulateWorkers(int NUM_THREADS){
-		// Create threads
+		// Intialize threads array
 		thread = new Thread[NUM_THREADS];
-
+		// Create threads
 		for(int i = 0; i < NUM_THREADS; i++ ){
+			// populateThread is created with respective file processoe amd tree objects.
 			PopulateThread populateThread = new PopulateThread(file, tree);
+			// Thread is created with populateThread object.
 			thread[i] = new Thread(populateThread);
 		}
-
+		// starts threads
 		for(int i = 0; i < NUM_THREADS; i++ ){
 			thread[i].start();
 		}
-		
-		try{
+
+		// joins threads
+		try{// exception should be catched for join operation
 			for(int i = 0; i < NUM_THREADS; i++ ){
 				thread[i].join();
 			}
 		}catch(Exception ex){
+			// prints the error and stack.
 			System.err.println(ex.getMessage());
 	    	ex.printStackTrace();
 	    	System.exit(0);
 		}
-
-		tree.printNodes();
+		file.closeFile();
+		// prints the stored words(nodes) for testing only.
+ 		tree.printNodes();
 	}
 
 	public void startDeleteWorkers(int NUM_THREADS){

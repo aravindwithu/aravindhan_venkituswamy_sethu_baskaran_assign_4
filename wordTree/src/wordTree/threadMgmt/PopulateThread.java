@@ -9,6 +9,7 @@ public class PopulateThread implements Runnable{
 	private TreeBuilder tree;
 
 	public PopulateThread(FileProcessor fileIn, TreeBuilder treeIn){
+		// The respective file object and tree object are assigned.
 		file = fileIn;
 		tree = treeIn;
 		System.out.println("in pt");
@@ -17,12 +18,14 @@ public class PopulateThread implements Runnable{
 	public void run(){	
 		System.out.println("in pt-run");
 		String line;
+		// File is read using fileProcessor class readLine method(synchronized)
 	    while ((line = file.readLine(true)) != null)
 	    {
 	    	// Read line is split into array of string based on " " charecter.
     		String[] words = line.split(" ");
     		for(String word : words){
     			if(!word.equals("")){
+    				// Each word is inserted in tree using insertNode(synchronized) method in treeBuilder class.
     				tree.insertNode(word);
     			}
     		}
