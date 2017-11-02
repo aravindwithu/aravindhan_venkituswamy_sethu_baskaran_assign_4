@@ -16,7 +16,7 @@ public class CreateWorkers{
 	public void startPopulateWorkers(int NUM_THREADS){
 		// Create threads
 		for(int i = 1; i <= NUM_THREADS; i++ ){
-			new PopulateThread("Thread-" + String.valueOf(i),fileProcessor);
+			new PopulateThread("Thread-"+i, fileProcessor);
 		}
 		
 	}
