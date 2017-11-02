@@ -10,9 +10,9 @@ public class CreateWorkers{
 	private FileProcessor file;
 	private Results results;
 	private TreeBuilder tree;
-	private PopulateThread populateThread[];
+	private Thread thread[];
 
-	public CreateWorkers(FileProcessor fileIn,Results results){
+	public CreateWorkers(FileProcessor fileIn, Results results){
 		file = fileIn;
 		results = results;
 		tree = new TreeBuilder();
@@ -20,28 +20,27 @@ public class CreateWorkers{
 
 	public void startPopulateWorkers(int NUM_THREADS){
 		// Create threads
-		populateThread = new PopulateThread[NUM_THREADS];
+		thread = new Thread[NUM_THREADS];
 
 		for(int i = 0; i < NUM_THREADS; i++ ){
-			populateThread[i] = new PopulateThread("Thread_"+ i, tree);
+			PopulateThread populateThread = new PopulateThread(file, tree);
+			thread[i] = new Thread(populateThread);
 		}
 
-		int temp_Num = 1;
-		String line;
+		for(int i = 0; i < NUM_THREADS; i++ ){
+			thread[i].start();
+		}
+		try{
+			for(int i = 0; i < NUM_THREADS; i++ ){
+				thread[i].join();
+			}
+		}catch(Exception ex){
+			System.err.println(ex.getMessage());
+	    	ex.printStackTrace();
+	    	System.exit(0);
+		}
 
-	    while ((line = file.readLine(true)) != null)
-	    {
-	    	if(!line.equals("")){
-	    		if(temp_Num > NUM_THREADS){
-	    			temp_Num = 1;
-	  			}
-	    		if(temp_Num <= NUM_THREADS){
-	    			 populateThread[temp_Num-1].start(line);
-	    		}
-	    		temp_Num++;
-	    	}
-	    }
-	    
+		tree.printNodes();
 	}
 
 	public void startDeleteWorkers(int NUM_THREADS){

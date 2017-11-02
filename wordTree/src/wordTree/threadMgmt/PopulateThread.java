@@ -1,36 +1,30 @@
 package wordTree.threadMgmt;
 
 import wordTree.myTree.TreeBuilder;
+import wordTree.util.FileProcessor;
 
 public class PopulateThread implements Runnable{
 	
-	private String name;
-	private Thread thread;
-	private String line;
+	private FileProcessor file;
 	private TreeBuilder tree;
 
-	public PopulateThread(String nameIn, TreeBuilder treeIn){
-		name = nameIn;
+	public PopulateThread(FileProcessor fileIn, TreeBuilder treeIn){
+		file = fileIn;
 		tree = treeIn;
-		thread = new Thread(this, name);
-		System.out.println("New Thread "+name);
-	}
-
-	/*public void assignLine(String lineIn){
-		line = lineIn;
-	}*/
-
-	public void start(String lineIn){
-		line = lineIn;
-		thread.start();
+		System.out.println("in pt");
 	}
 	
-	public void run(){
-		// Read line is split into array of string based on " " charecter.
-    	String[] words = line.split(" ");
-    	for(String word : words){
-    		if(!word.equals("")){
-    			tree.insertNode(word);
+	public void run(){	
+		System.out.println("in pt-run");
+		String line;
+	    while ((line = file.readLine(true)) != null)
+	    {
+	    	// Read line is split into array of string based on " " charecter.
+    		String[] words = line.split(" ");
+    		for(String word : words){
+    			if(!word.equals("")){
+    				tree.insertNode(word);
+    			}
     		}
     	}
 	}

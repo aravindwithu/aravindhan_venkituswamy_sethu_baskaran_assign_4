@@ -42,7 +42,7 @@ private BufferedReader file; // BufferedReader object to read from file.
 	* @param read - If read is true then readLine() is returned else file object is closed. 
 	* @return String - read file line string or message related to file activity.
 	*/
-	public String readLine(boolean read){
+	public synchronized String readLine(boolean read){
 		try{
 			if(isFileOpen){
 				if(read){
