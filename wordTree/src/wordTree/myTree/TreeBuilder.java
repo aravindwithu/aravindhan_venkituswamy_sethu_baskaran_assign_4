@@ -63,5 +63,39 @@ public class TreeBuilder {
         }
 	}
 
-
+	/**
+	* printNodes public method.
+	* To write tree data to result array list.
+	* @param results_orig.
+	* @param backup_Results_1.
+	* @param backup_Results_2.
+	*/
+	public void printNodes(
+		//Results results
+		){
+		printNodes(root
+			//, results_orig
+			);
+	}
+	/**
+	* printNodes private method.
+	* To write tree data to result array list.
+	* @param currentNode
+	* @param result
+	*/
+	private void printNodes(Node currentNode
+		//, Results result
+		){
+		if(currentNode != null){
+			printNodes(currentNode.getLeftChild()
+				//, result
+				);
+			System.out.println(currentNode.getWordID() + ":" + currentNode.getWord());
+			//String resultStr = currentNode.getWordID() + ":" + currentNode.getWord();
+			//result.storeNewResult(resultStr);			
+			printNodes(currentNode.getRightChild()
+				//, result
+				);
+		}
+	}
 }
