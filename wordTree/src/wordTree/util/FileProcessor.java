@@ -2,6 +2,7 @@ package wordTree.util;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.File;	
 
 public class FileProcessor{
 private BufferedReader file; // BufferedReader object to read from file.
@@ -13,7 +14,14 @@ private BufferedReader file; // BufferedReader object to read from file.
 	* @param filename to open the file reader object.
 	*/
 	public FileProcessor(String filename){
+		File fileCheck;
 		try{
+			// Check if file doesn't exist
+			fileCheck = new File(filename);
+			if(!fileCheck.exists() || fileCheck.isDirectory()) {
+			    System.err.println("The " + filename + " file does not exist.Please include it");
+			    System.exit(1);
+			}
 			file = new BufferedReader(new FileReader(filename));
 			isFileOpen = true;
 		}
@@ -22,6 +30,9 @@ private BufferedReader file; // BufferedReader object to read from file.
 	    	System.err.println(ex.getMessage());
 	    	ex.printStackTrace();
 	    	System.exit(0);
+	  	}
+	  	finally{
+	  		fileCheck = null;
 	  	}
 	}
 	/**
@@ -32,8 +43,6 @@ private BufferedReader file; // BufferedReader object to read from file.
 	* @return String - read file line string or message related to file activity.
 	*/
 	public String readLine(boolean read){
-		// Add sync ===
-
 		try{
 			if(isFileOpen){
 				if(read){

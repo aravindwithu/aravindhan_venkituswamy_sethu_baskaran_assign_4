@@ -42,17 +42,6 @@ public class CreateWorkers{
 	    	}
 	    }
 	    
-	    /*for(int i = 0; i < NUM_THREADS; i++ ){
-			runnable[i].start();
-		}*/
-
-	    tree.printNodes();
-
-
-		/*for(int i = 0; i < NUM_THREADS; i++ ){
-			runnable.add(new PopulateThread("Thread_"+i, fileProcessor));
-		}*/
-
 	}
 
 	public void startDeleteWorkers(int NUM_THREADS){
