@@ -1,16 +1,13 @@
 package wordTree.myTree;
 
 public class Node{
-
-	private int wordID;
 	private String word;
 	private int wordLength;
 	private int numOfOccurence;
 	private Node leftChild;
 	private Node rightChild;
 
-	public Node(int wordIDIn, String newWord){
-		wordID = wordIDIn;
+	public Node(String newWord){
 		word = newWord;
 		wordLength = word.length();
 		numOfOccurence = 1;
@@ -24,14 +21,6 @@ public class Node{
 	*/
 	public String getWord(){
 		return word;
-	}
-
-	/**
-	* getWordID method.
-	* @return int (wordID)
-	*/
-	public int getWordID(){
-		return wordID;
 	}
 
 	/**

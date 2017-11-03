@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class TreeBuilder {
 	private Node root;
-	private int wordCount;
 
 	/**
 	* TreeBuilder constructor to intialize TreeBuilder class.
@@ -12,7 +11,6 @@ public class TreeBuilder {
 	*/
 	public TreeBuilder(){
 		root = null;
-		wordCount = 0;
 	}
 
 	/**
@@ -22,19 +20,11 @@ public class TreeBuilder {
 	* The public insertNode method called by the threads to insert word is synchronized.
 	* @param newWord.
 	*/
-	public void insertNode(String newWord){
+	public synchronized void insertNode(String newWord){
 		try{
-			synchronized(this){
-				Node newNode = getNode(newWord);
-				if(newNode == null){
-					System.out.println("New word is "+newWord);
-					newNode = insertNode(root, newWord);	
-				}
-				newNode.incrementCount();
-				wordCount++;
-			}
-		}
-		catch(Exception ex){
+			Node newNode = new Node(newWord);
+			root = insertNode(root, newNode);
+		}catch(Exception ex){
 			System.err.println(ex.getMessage());// prints the error message.
 	    	ex.printStackTrace();// prints stack trace.
 	    	System.exit(0);
@@ -50,42 +40,36 @@ public class TreeBuilder {
 	* @see http://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/
 	* @return Node (root);
 	*/
-	private Node insertNode(Node root, String word){        
-		// System.out.println("INSIDE INSERT");
+	private Node insertNode(Node root, Node newNode){
 		if(root == null){
-			root = new Node(wordCount,word);
+			root = newNode;
 			return root;
 		}
 
-    	if (word.compareTo(root.getWord()) < 0){
-            root.setLeftChild(insertNode(root.getLeftChild(), word));
-        }
-    	else if (word.compareTo(root.getWord()) > 0){
-            root.setRightChild(insertNode(root.getRightChild(), word));
-        }
-        return root;
+		if(newNode.getWord().equals(root.getWord())){
+       		root.incrementCount();
+        	return root;
+       	}else{
+       		int cmpResult =  newNode.getWord().compareTo(root.getWord());
+        	if (0 > cmpResult){
+        		System.out.println("left");
+	            root.setLeftChild(insertNode(root.getLeftChild(), newNode));
+	        }
+	    	else if (0 < cmpResult){
+	    		System.out.println("right");
+	            root.setRightChild(insertNode(root.getRightChild(), newNode));
+        	}
+        	return root;
+       	}
 	}
 
 	/**
 	* printNodes public method.
 	* To write tree data to result array list.
-	* @param results_orig.
-	* @param backup_Results_1.
-	* @param backup_Results_2.
+	* @param results.
 	*/
 	public void printNodes(){
-		printTree(root);
-		System.out.println("Inside pritn");
-	}
-
-
-	public void printTree(Node node){
-		if(node == null){
-			return;
-		}
-		printTree(node.getLeftChild());
-		System.out.println("Node is "+node.getWord());
-		printTree(node.getRightChild());
+		printNodes(root);
 	}
 
 	/**
@@ -94,21 +78,13 @@ public class TreeBuilder {
 	* @param currentNode
 	* @param result
 	*/
-	// private void printNodes(Node currentNode
-	// 	//, Results result
-	// 	){
-	// 	if(currentNode != null){
-	// 		printNodes(currentNode.getLeftChild()
-	// 			//, result
-	// 			);
-	// 		System.out.println(currentNode.getWord() + "->" + currentNode.getNumOfOccurence());
-	// 		//String resultStr = currentNode.getWordID() + ":" + currentNode.getWord();
-	// 		//result.storeNewResult(resultStr);			
-	// 		printNodes(currentNode.getRightChild()
-	// 			//, result
-	// 			);
-	// 	}
-	// }
+	private void printNodes(Node currentNode){
+	 	if(currentNode != null){
+	 		printNodes(currentNode.getLeftChild());
+	 		System.out.println(currentNode.getWord() + "->" + currentNode.getNumOfOccurence());		
+	 		printNodes(currentNode.getRightChild());
+	 	}
+	 }
 
 	public Node getNode(String word){
 		Node currentNode = root;
