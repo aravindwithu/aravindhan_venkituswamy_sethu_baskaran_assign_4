@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class TreeBuilder {
 	private Node root;
-
 	/**
 	* TreeBuilder constructor to intialize TreeBuilder class.
 	* Intializes the root object for original, backup 1 and backup 2 trees to null.
@@ -21,13 +20,16 @@ public class TreeBuilder {
 	* @param newWord.
 	*/
 	public synchronized void insertNode(String newWord){
+		Node newNode;
 		try{
-			Node newNode = new Node(newWord);
+			newNode = new Node(newWord);
 			root = insertNode(root, newNode);
 		}catch(Exception ex){
 			System.err.println(ex.getMessage());// prints the error message.
 	    	ex.printStackTrace();// prints stack trace.
 	    	System.exit(0);
+		}finally{
+			newNode = null;
 		}
 	}
 
