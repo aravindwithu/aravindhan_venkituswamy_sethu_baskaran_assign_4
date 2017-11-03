@@ -48,16 +48,14 @@ public class CreateWorkers{
 
 		file.closeFile();
 		// prints the stored words(nodes) for testing only.
- 		// tree.printNodes();
+ 		tree.printNodes();
 	}
 
 	public void startDeleteWorkers(int NUM_THREADS,String[] deleteWords){
 		// Create threads
 		// System.out.println(String.join(" ",deleteWords));
 		for(int i = 0; i < NUM_THREADS; i++ ){
-			// populateThread is created with respective file processoe amd tree objects.
 			Runnable deleteThread = new DeleteThread(tree,deleteWords[i]);
-			// Thread is created with populateThread object.
 			thread[i] = new Thread(deleteThread,"Thread - "+String.valueOf(i+1));
 		}
 		// starts threads
@@ -71,7 +69,6 @@ public class CreateWorkers{
 				thread[i].join();
 			}
 		}catch(Exception ex){
-			// prints the error and stack.
 			System.err.println(ex.getMessage());
 	    	ex.printStackTrace();
 	    	System.exit(0);

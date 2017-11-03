@@ -58,6 +58,12 @@ public class Node{
 		numOfOccurence++;
 	}
 
+	public void decrementCount(){
+		if(numOfOccurence > 0){
+			numOfOccurence--;	
+		}		
+	}
+
 	/**
 	* getLeftChild method.
 	* @return Node (leftChild node)

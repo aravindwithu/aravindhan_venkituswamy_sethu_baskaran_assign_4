@@ -22,11 +22,17 @@ public class TreeBuilder {
 	* The public insertNode method called by the threads to insert word is synchronized.
 	* @param newWord.
 	*/
-	public synchronized void insertNode(String newWord){
+	public void insertNode(String newWord){
 		try{
-			Node newNode = new Node(wordCount,newWord);
-			root = insertNode(root, newNode);
-			wordCount++;
+			synchronized(this){
+				Node newNode = getNode(newWord);
+				if(newNode == null){
+					System.out.println("New word is "+newWord);
+					newNode = insertNode(root, newWord);	
+				}
+				newNode.incrementCount();
+				wordCount++;
+			}
 		}
 		catch(Exception ex){
 			System.err.println(ex.getMessage());// prints the error message.
@@ -44,24 +50,20 @@ public class TreeBuilder {
 	* @see http://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/
 	* @return Node (root);
 	*/
-	private Node insertNode(Node root, Node newNode){
-        if (root == null) {
-            root = newNode;
-            return root;
+	private Node insertNode(Node root, String word){        
+		// System.out.println("INSIDE INSERT");
+		if(root == null){
+			root = new Node(wordCount,word);
+			return root;
+		}
+
+    	if (word.compareTo(root.getWord()) < 0){
+            root.setLeftChild(insertNode(root.getLeftChild(), word));
         }
-        
-        if(newNode.getWord().equals(root.getWord())){
-        	root.incrementCount();
-        	return root;
-        }else{
-        	if (newNode.getWordID() < root.getWordID()){
-	            root.setLeftChild(insertNode(root.getLeftChild(), newNode));
-	        }
-	    	else if (newNode.getWordID() > root.getWordID()){
-	            root.setRightChild(insertNode(root.getRightChild(), newNode));
-	        }
-	        return root;
+    	else if (word.compareTo(root.getWord()) > 0){
+            root.setRightChild(insertNode(root.getRightChild(), word));
         }
+        return root;
 	}
 
 	/**
@@ -71,55 +73,58 @@ public class TreeBuilder {
 	* @param backup_Results_1.
 	* @param backup_Results_2.
 	*/
-	public void printNodes(
-		//Results results
-		){
-		printNodes(root
-			//, results_orig
-			);
+	public void printNodes(){
+		printTree(root);
+		System.out.println("Inside pritn");
 	}
+
+
+	public void printTree(Node node){
+		if(node == null){
+			return;
+		}
+		printTree(node.getLeftChild());
+		System.out.println("Node is "+node.getWord());
+		printTree(node.getRightChild());
+	}
+
 	/**
 	* printNodes private method.
 	* To write tree data to result array list.
 	* @param currentNode
 	* @param result
 	*/
-	private void printNodes(Node currentNode
-		//, Results result
-		){
-		if(currentNode != null){
-			printNodes(currentNode.getLeftChild()
-				//, result
-				);
-			System.out.println(currentNode.getWordID() + ":" + currentNode.getWord() + "->" + currentNode.getNumOfOccurence());
-			//String resultStr = currentNode.getWordID() + ":" + currentNode.getWord();
-			//result.storeNewResult(resultStr);			
-			printNodes(currentNode.getRightChild()
-				//, result
-				);
-		}
-	}
+	// private void printNodes(Node currentNode
+	// 	//, Results result
+	// 	){
+	// 	if(currentNode != null){
+	// 		printNodes(currentNode.getLeftChild()
+	// 			//, result
+	// 			);
+	// 		System.out.println(currentNode.getWord() + "->" + currentNode.getNumOfOccurence());
+	// 		//String resultStr = currentNode.getWordID() + ":" + currentNode.getWord();
+	// 		//result.storeNewResult(resultStr);			
+	// 		printNodes(currentNode.getRightChild()
+	// 			//, result
+	// 			);
+	// 	}
+	// }
 
-	public Node getNode(Node node, String word){
-		if(node == null){
-			return null;
-		}
-
-		if(node.getWord().equals(word)){
-			return node;
-		}
-		else{
-			Node left = getNode(node.getLeftChild(),word);
-			Node right = getNode(node.getRightChild(),word);
-			if(left != null){
-				return right;
+	public Node getNode(String word){
+		Node currentNode = root;
+		
+		while(currentNode != null)	{
+			if(currentNode.getWord().equals(word)){
+				return currentNode;
+			}
+			else if(currentNode.getWord().compareTo(word) < 0){
+				currentNode = currentNode.getRightChild();
 			}
 			else{
-				return right;
+				currentNode = currentNode.getLeftChild();
 			}
 		}
-		
-
+		return null;
 	}
 
 	public void deleteWord(String word){
@@ -127,8 +132,12 @@ public class TreeBuilder {
 			if(root == null){
 				return;
 			}
-			Node node = getNode(root,word);
-			System.out.println("Node is "+node.getWord());
+			Node node = getNode(word);
+			if(node != null){
+				System.out.println("Node is ="+node.getWord() + ":"+node.getNumOfOccurence());
+				node.decrementCount();
+				System.out.println("Afer delete:" +node.getNumOfOccurence());
+			}			
 		}
 	}
 }
