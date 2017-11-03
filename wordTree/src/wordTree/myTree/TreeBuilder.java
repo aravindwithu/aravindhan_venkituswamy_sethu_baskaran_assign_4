@@ -20,16 +20,12 @@ public class TreeBuilder {
 	* @param newWord.
 	*/
 	public synchronized void insertNode(String newWord){
-		Node newNode;
 		try{
-			newNode = new Node(newWord);
-			root = insertNode(root, newNode);
+			root = insertNode(root, newWord);
 		}catch(Exception ex){
 			System.err.println(ex.getMessage());// prints the error message.
 	    	ex.printStackTrace();// prints stack trace.
 	    	System.exit(0);
-		}finally{
-			newNode = null;
 		}
 	}
 
@@ -42,24 +38,24 @@ public class TreeBuilder {
 	* @see http://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/
 	* @return Node (root);
 	*/
-	private Node insertNode(Node root, Node newNode){
+	private Node insertNode(Node root, String word){
 		if(root == null){
-			root = newNode;
+			root = new Node(word);
 			return root;
 		}
 
-		if(newNode.getWord().equals(root.getWord())){
+		if(word.equals(root.getWord())){
        		root.incrementCount();
         	return root;
        	}else{
-       		int cmpResult =  newNode.getWord().compareTo(root.getWord());
+       		int cmpResult =  word.compareTo(root.getWord());
         	if (0 > cmpResult){
         		System.out.println("left");
-	            root.setLeftChild(insertNode(root.getLeftChild(), newNode));
+	            root.setLeftChild(insertNode(root.getLeftChild(), word));
 	        }
 	    	else if (0 < cmpResult){
 	    		System.out.println("right");
-	            root.setRightChild(insertNode(root.getRightChild(), newNode));
+	            root.setRightChild(insertNode(root.getRightChild(), word));
         	}
         	return root;
        	}
