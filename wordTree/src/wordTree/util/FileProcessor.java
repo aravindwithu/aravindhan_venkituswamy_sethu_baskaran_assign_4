@@ -43,18 +43,20 @@ private BufferedReader file; // BufferedReader object to read from file.
 	* @param read - If read is true then readLine() is returned else file object is closed. 
 	* @return String - read file line string or message related to file activity.
 	*/
-	public synchronized String readLine(boolean read){
+	public String readLine(boolean read){
 		try{
-			if(isFileOpen){
-				if(read){
-					return file.readLine();
+			synchronized(this){
+				if(isFileOpen){
+					if(read){
+						return file.readLine();
+					}
+					else{
+						closeFile();
+						return "file closed sucessfully";
+					}
+				}else{
+					return "file is in closed state";
 				}
-				else{
-					closeFile();
-					return "file closed sucessfully";
-				}
-			}else{
-				return "file is in closed state";
 			}
 		}
 		catch (Exception ex)
@@ -70,7 +72,7 @@ private BufferedReader file; // BufferedReader object to read from file.
 	* closeFile method.
 	* closes the file object.
 	*/
-	private void closeFile(){
+	public void closeFile(){
 		try{
 			file.close();
 			isFileOpen = false;

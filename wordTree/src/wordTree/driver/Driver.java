@@ -25,7 +25,8 @@ public class Driver {
 
 	    try{
 	    	// command line validation for input file and output file respectively.
-	    	String inputFile = "", outputFile = "", deleteStr= "";
+	    	String inputFile = "", outputFile = "";
+	    	String[] deleteStr;
 	    	int NUM_THREADS= 0;
 		    if(5 == args.length){// validates given arguments array length to 5.
 		    	if(!args[0].equals("${arg0}") && !args[0].equals("")){// validates 1st input file argument value.
@@ -42,7 +43,8 @@ public class Driver {
 		    		throw new Exception("Please provide output file.");
 		    	}
 
-		    	if(!args[2].equals("${arg2}") && !args[2].equals("")){// validates 3rd number of threads argument value.
+		    	String threadCheck = "123";
+		    	if(!args[2].equals("${arg2}") && !args[2].equals("") && (threadCheck.contains(args[2]))){// validates 3rd number of threads argument value.
 					try{
 						NUM_THREADS = Integer.parseInt(args[2]);
 					}catch(Exception ex){
@@ -54,21 +56,27 @@ public class Driver {
 		    	else{
 		    		throw new Exception("Please provide number of threads.");
 		    	}
-
+		    	// CHeck if empty???
 		    	if(!args[3].equals("${arg3}") && !args[3].equals("")){// validates 4th delete words argument value.
-					deleteStr = args[3];
+					String[] arg3 = args[3].split(" ");
+					if(arg3.length == NUM_THREADS){
+						// deleteStr = String.join(" ",args[3]);
+						deleteStr = arg3;
+					}else{
+						throw new Exception("Number of threads not equal to delete words.");
+					}					
 		    	}
 		    	else{
 		    		throw new Exception("Please provide delete words.");
 		    	}
 
-		    	if(!args[2].equals("${arg4}") && !args[2].equals("")){// validates 5th my Logger Level value.
-		    		myLogger = new MyLogger();
-					myLogger.setDebugValue(Integer.parseInt(args[2]));
-		    	}
-		    	else{
-		    		//By default my logger level is 0;
-		    	}
+		    	String arg4 = "01234";
+				if(args[4].equals("${arg4}") || args[4].equals("") || args[4].length() != 1 || (!arg4.contains(args[4]))){
+					throw new Exception("Logger value is incorrect");
+				}
+				else{
+					MyLogger logger = new MyLogger();
+				}
 		    }
 		    else{
 		    	throw new Exception("Please pass exactly 5 arguments one for input and another for output files.");
@@ -78,6 +86,7 @@ public class Driver {
 			results = new Results(outputFile);
 			CreateWorkers workers = new CreateWorkers(file,results);
 			workers.startPopulateWorkers(NUM_THREADS);
+			workers.startDeleteWorkers(NUM_THREADS,deleteStr);
 		 
 		    System.out.println("Output files generated successfully.");
 	    }

@@ -99,4 +99,36 @@ public class TreeBuilder {
 				);
 		}
 	}
+
+	public Node getNode(Node node, String word){
+		if(node == null){
+			return null;
+		}
+
+		if(node.getWord().equals(word)){
+			return node;
+		}
+		else{
+			Node left = getNode(node.getLeftChild(),word);
+			Node right = getNode(node.getRightChild(),word);
+			if(left != null){
+				return right;
+			}
+			else{
+				return right;
+			}
+		}
+		
+
+	}
+
+	public void deleteWord(String word){
+		synchronized(this){
+			if(root == null){
+				return;
+			}
+			Node node = getNode(root,word);
+			System.out.println("Node is "+node.getWord());
+		}
+	}
 }

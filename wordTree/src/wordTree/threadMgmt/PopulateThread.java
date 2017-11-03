@@ -12,15 +12,17 @@ public class PopulateThread implements Runnable{
 		// The respective file object and tree object are assigned.
 		file = fileIn;
 		tree = treeIn;
-		System.out.println("in pt");
 	}
 	
 	public void run(){	
-		System.out.println("in pt-run");
+		// System.out.println("in pt-run");
 		String line;
+		// System.out.println("thread start: "+Thread.currentThread().getName());
 		// File is read using fileProcessor class readLine method(synchronized)
+		// synchronized(this){
 	    while ((line = file.readLine(true)) != null)
-	    {
+	    {		    	
+	    	// System.out.println(line);
 	    	// Read line is split into array of string based on " " charecter.
     		String[] words = line.split(" ");
     		for(String word : words){
