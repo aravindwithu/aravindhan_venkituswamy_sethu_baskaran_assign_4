@@ -2,6 +2,7 @@ package wordTree;
 
 import wordTree.myTree.TreeBuilder;
 import wordTree.myTree.Node;
+import wordTree.store.Results;
 
 public class WordCount{
 
@@ -19,7 +20,6 @@ public class WordCount{
 
 	public void getWordCount(){
 		Node root = tree.getRoot();
-		// tree.printNodes();
 		getWordCount(root);
 	}
 
@@ -27,7 +27,7 @@ public class WordCount{
 		if(node == null){
 			return;
 		}
-		System.out.println(node.getWord());
+		// System.out.println(node.getWord());
 		getWordCount(node.getLeftChild());
 		distinctWords++;
 		words += node.getNumOfOccurence();
@@ -35,7 +35,10 @@ public class WordCount{
 		getWordCount(node.getRightChild());
 	}
 
-	public void display(){
-		System.out.println("Words:"+words+", distinct:"+distinctWords+", chars:"+characters);
+	public void saveCount(Results results){
+		// System.out.println("Words:"+words+", distinct:"+distinctWords+", chars:"+characters);
+		results.storeNewResult("The total number of words: "+words);
+		results.storeNewResult("The total number of characters: "+characters);
+		results.storeNewResult("The total number of distinct words: "+distinctWords);
 	}
 }

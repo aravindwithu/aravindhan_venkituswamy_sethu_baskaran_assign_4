@@ -7,7 +7,7 @@ import wordTree.threadMgmt.CreateWorkers;
 import wordTree.util.FileProcessor;
 import wordTree.util.MyLogger;
 import java.io.PrintWriter;
-
+import java.util.ArrayList;
 
 public class Driver {
 
@@ -77,6 +77,14 @@ public class Driver {
 				}
 				else{
 					MyLogger logger = new MyLogger();
+					try{
+						int log = Integer.parseInt(arg4);
+					}
+					catch(Exception e){
+						e.printStackTrace();
+						System.exit(0);
+					}
+					logger.setDebugValue(log);
 				}
 		    }
 		    else{
@@ -90,8 +98,12 @@ public class Driver {
 			workers.startDeleteWorkers(NUM_THREADS,deleteStr);
 		 	WordCount wordCount = new WordCount(workers.getTree());
 		 	wordCount.getWordCount();
-		 	wordCount.display();
-		    // System.out.println("Output files generated successfully.");
+		 	wordCount.saveCount(results);
+		 	ArrayList<String> list = results.getresultStore();
+		 	for(String string : list){
+		 		results.writeSchedulesToFile(string);
+		 	}
+		 	results.closeFile();
 	    }
 	    catch(Exception ex){
 	    	System.err.println(ex.getMessage());// prints the error message.

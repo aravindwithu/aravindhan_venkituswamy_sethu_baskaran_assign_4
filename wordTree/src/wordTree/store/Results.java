@@ -24,8 +24,8 @@ public class Results implements FileDisplayInterface,StdoutDisplayInterface{
 	}
 
 	// Adds the student detail as a whole to the list
-	public void storeNewResult(String studentCourses){
-		this.resultStore.add(studentCourses);
+	public void storeNewResult(String string){
+		this.resultStore.add(string);
 	}
 
 	// Returns the list of students in tree b_number along with course details
@@ -34,9 +34,9 @@ public class Results implements FileDisplayInterface,StdoutDisplayInterface{
 	}
 
 	// Writes a string to output file
-	public void writeToFile(String s){
+	public void writeSchedulesToFile(String string){
 		try{
-			bwriter.write(s);
+			bwriter.write(string);
 			bwriter.newLine();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -44,8 +44,8 @@ public class Results implements FileDisplayInterface,StdoutDisplayInterface{
 	}
 
 	// Writes a string to stdout
-	public void writeToStdout(String s){
-		System.out.println(s);
+	public void writeToScreen(String string){
+		System.out.println(string);
 	}
 
 	// Closes the writer stream

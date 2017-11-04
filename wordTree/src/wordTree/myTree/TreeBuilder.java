@@ -56,11 +56,9 @@ public class TreeBuilder {
        	}else{
        		int cmpResult =  word.compareTo(root.getWord());
         	if (0 > cmpResult){
-        		// System.out.println("Sett left");
 	            root.setLeftChild(insertNode(root.getLeftChild(), word));
 	        }
 	    	else if (0 < cmpResult){
-	    		// System.out.println("Sett right");
 	            root.setRightChild(insertNode(root.getRightChild(), word));
         	}
         	return root;
