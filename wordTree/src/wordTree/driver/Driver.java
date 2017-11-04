@@ -76,15 +76,15 @@ public class Driver {
 					throw new Exception("Logger value is incorrect");
 				}
 				else{
-					MyLogger logger = new MyLogger();
 					try{
-						int log = Integer.parseInt(arg4);
+						int log = Integer.parseInt(args[4]);
+						MyLogger.setDebugValue(log);
 					}
 					catch(Exception e){
 						e.printStackTrace();
 						System.exit(0);
 					}
-					logger.setDebugValue(log);
+					
 				}
 		    }
 		    else{

@@ -1,5 +1,7 @@
 package wordTree.myTree;
 
+import wordTree.util.MyLogger;
+
 public class Node{
 	private String word;
 	private int wordLength;
@@ -12,7 +14,8 @@ public class Node{
 		wordLength = word.length();
 		numOfOccurence = 1;
 		leftChild = null;
-		rightChild = null;		
+		rightChild = null;	
+		MyLogger.writeMessage("Inside Node constructor",MyLogger.DebugLevel.CONSTRUCTOR);	
 	}
 
 	/**

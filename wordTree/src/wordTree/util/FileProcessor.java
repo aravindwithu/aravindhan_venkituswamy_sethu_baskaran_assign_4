@@ -24,6 +24,7 @@ private BufferedReader file; // BufferedReader object to read from file.
 			}
 			file = new BufferedReader(new FileReader(filename));
 			isFileOpen = true;
+			MyLogger.writeMessage("Inside FileProcessor constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 		}
 		catch (Exception ex)
 	  	{

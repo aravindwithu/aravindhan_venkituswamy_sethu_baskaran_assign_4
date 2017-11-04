@@ -1,6 +1,7 @@
 package wordTree.threadMgmt;
 
 import wordTree.myTree.TreeBuilder;
+import wordTree.util.MyLogger;
 
 public class DeleteThread implements Runnable{
 	
@@ -10,12 +11,12 @@ public class DeleteThread implements Runnable{
 	public DeleteThread(TreeBuilder treeIn,String wordIn){
 		tree = treeIn;
 		word = wordIn;
+		MyLogger.writeMessage("Inside DeleteThread constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 	}
 	
 	public void run(){
 		tree.deleteWord(word);
-		// System.out.println("Inside runn");
-		// System.out.println("Distinct s " +tree.getdistinctwordCount() +" wrd is = "+tree.getWordCount());
+		MyLogger.writeMessage("DeleteThread run",MyLogger.DebugLevel.THREAD_RUN);
 	}
 
 }

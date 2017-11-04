@@ -7,13 +7,13 @@ package wordTree.util;
 
 public class MyLogger{
     /*DEBUG_VALUE=4 [Print to stdout everytime a constructor is called]
-      DEBUG_VALUE=3 [Print to stdout everytime the state is changed]
-      DEBUG_VALUE=2 [FIXME: add your own scheme here]
+      DEBUG_VALUE=3 [Print to stdout everytime a thread's run() is called]
+      DEBUG_VALUE=2 [Write to stdout before writing to file]
       DEBUG_VALUE=1 [FIXME: add your own scheme here]
       DEBUG_VALUE=0 [No output should be printed from the applicatio to stdout. It is ok to write to the output file though" ]
     */
 
-    public static enum DebugLevel {RELEASE, DATA_NEEDED, STATE_CHANGE, RESULTS_OUTPUT, CONSTRUCTOR};
+    public static enum DebugLevel {RELEASE, DATA_NEEDED, STATE_CHANGE, THREAD_RUN, CONSTRUCTOR};
 
     private static DebugLevel debugLevel;
 
@@ -22,7 +22,7 @@ public class MyLogger{
             case 0: debugLevel = DebugLevel.RELEASE; break;
             case 1: debugLevel = DebugLevel.DATA_NEEDED; break;
             case 2: debugLevel = DebugLevel.STATE_CHANGE; break;
-	 		case 3: debugLevel = DebugLevel.RESULTS_OUTPUT; break;
+	 		case 3: debugLevel = DebugLevel.THREAD_RUN; break;
             case 4: debugLevel = DebugLevel.CONSTRUCTOR; break;
 		}
     }

@@ -2,6 +2,7 @@ package wordTree.threadMgmt;
 
 import wordTree.myTree.TreeBuilder;
 import wordTree.util.FileProcessor;
+import wordTree.util.MyLogger;
 
 public class PopulateThread implements Runnable{
 	
@@ -12,17 +13,17 @@ public class PopulateThread implements Runnable{
 		// The respective file object and tree object are assigned.
 		file = fileIn;
 		tree = treeIn;
+		MyLogger.writeMessage("Inside PopulateThread constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 	}
 	
 	public void run(){	
+		MyLogger.writeMessage("PopulateThread run",MyLogger.DebugLevel.THREAD_RUN);
 		String line;
 	    while ((line = file.readLine(true)) != null)
 	    {		    	
-	    	// Read line is split into array of string based on " " charecter.
     		String[] words = line.split(" ");
     		for(String word : words){
     			if(!word.equals("")){
-    				// Each word is inserted in tree using insertNode(synchronized) method in treeBuilder class.
     				tree.insertNode(word);
     			}
     		}

@@ -2,9 +2,11 @@ package wordTree.store;
 
 import java.util.ArrayList;
 import wordTree.util.FileDisplayInterface;
+import wordTree.util.MyLogger;
+import wordTree.util.StdoutDisplayInterface;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import wordTree.util.StdoutDisplayInterface;
+
 import java.io.IOException;
 
 public class Results implements FileDisplayInterface,StdoutDisplayInterface{
@@ -16,6 +18,7 @@ public class Results implements FileDisplayInterface,StdoutDisplayInterface{
 		this.resultStore = new ArrayList<String>();
 		try{
 			this.bwriter = new BufferedWriter(new FileWriter(file));
+			MyLogger.writeMessage("Inside Results constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 		}catch(Exception e){
 			e.printStackTrace();
 			System.err.println("Error in writing file");
@@ -36,6 +39,7 @@ public class Results implements FileDisplayInterface,StdoutDisplayInterface{
 	// Writes a string to output file
 	public void writeSchedulesToFile(String string){
 		try{
+			MyLogger.writeMessage(string,MyLogger.DebugLevel.)
 			bwriter.write(string);
 			bwriter.newLine();
 		}catch(Exception e){

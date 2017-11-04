@@ -1,6 +1,7 @@
 package wordTree.myTree;
 
 import java.util.ArrayList;
+import wordTree.util.MyLogger;
 
 public class TreeBuilder {
 	private Node root;
@@ -11,6 +12,7 @@ public class TreeBuilder {
 	*/
 	public TreeBuilder(){
 		root = null;
+		MyLogger.writeMessage("Inside TreeBuilder constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 	}
 
 	/**

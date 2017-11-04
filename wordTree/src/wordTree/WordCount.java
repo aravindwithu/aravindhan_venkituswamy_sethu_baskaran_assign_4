@@ -3,6 +3,7 @@ package wordTree;
 import wordTree.myTree.TreeBuilder;
 import wordTree.myTree.Node;
 import wordTree.store.Results;
+import wordTree.util.MyLogger;
 
 public class WordCount{
 
@@ -16,6 +17,7 @@ public class WordCount{
 		words = 0;
 		characters = 0;
 		distinctWords = 0;
+		MyLogger.writeMessage("Inside WordCount constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 	}
 
 	public void getWordCount(){

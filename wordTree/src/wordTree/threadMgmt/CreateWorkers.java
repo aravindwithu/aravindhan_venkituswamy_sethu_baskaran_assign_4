@@ -3,6 +3,7 @@ package wordTree.threadMgmt;
 import wordTree.store.Results;
 import wordTree.util.FileProcessor;
 import wordTree.myTree.TreeBuilder;
+import wordTree.util.MyLogger;
 import wordTree.threadMgmt.PopulateThread;
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class CreateWorkers{
 		file = fileIn;
 		results = results;
 		tree = new TreeBuilder();
+		MyLogger.writeMessage("Inside CreateWorkers constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 	}
 
 	public void startPopulateWorkers(int NUM_THREADS){
