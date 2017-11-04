@@ -14,6 +14,8 @@ public class DeleteThread implements Runnable{
 	
 	public void run(){
 		tree.deleteWord(word);
+		// System.out.println("Inside runn");
+		// System.out.println("Distinct s " +tree.getdistinctwordCount() +" wrd is = "+tree.getWordCount());
 	}
 
 }

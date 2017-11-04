@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class TreeBuilder {
 	private Node root;
+
 	/**
 	* TreeBuilder constructor to intialize TreeBuilder class.
 	* Intializes the root object for original, backup 1 and backup 2 trees to null.
@@ -22,12 +23,21 @@ public class TreeBuilder {
 	public synchronized void insertNode(String newWord){
 		try{
 			root = insertNode(root, newWord);
-		}catch(Exception ex){
+		}
+		catch(Exception ex){
 			System.err.println(ex.getMessage());// prints the error message.
 	    	ex.printStackTrace();// prints stack trace.
 	    	System.exit(0);
 		}
 	}
+
+	// public int getdistinctwordCount(){
+	// 	return distinctwordCount;
+	// }
+
+	// public int getWordCount(){
+	// 	return wordCount;
+	// }
 
 	/**
 	* insertNode private method.
@@ -41,6 +51,7 @@ public class TreeBuilder {
 	private Node insertNode(Node root, String word){
 		if(root == null){
 			root = new Node(word);
+			distinctwordCount++;
 			return root;
 		}
 
@@ -50,17 +61,15 @@ public class TreeBuilder {
        	}else{
        		int cmpResult =  word.compareTo(root.getWord());
         	if (0 > cmpResult){
-        		System.out.println("left");
 	            root.setLeftChild(insertNode(root.getLeftChild(), word));
 	        }
 	    	else if (0 < cmpResult){
-	    		System.out.println("right");
 	            root.setRightChild(insertNode(root.getRightChild(), word));
         	}
         	return root;
        	}
 	}
-
+	
 	/**
 	* printNodes public method.
 	* To write tree data to result array list.

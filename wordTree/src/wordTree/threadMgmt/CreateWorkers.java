@@ -20,23 +20,15 @@ public class CreateWorkers{
 	}
 
 	public void startPopulateWorkers(int NUM_THREADS){
-		// Intialize threads array
 		thread = new Thread[NUM_THREADS];
-		// Create threads
 		for(int i = 0; i < NUM_THREADS; i++ ){
-			// populateThread is created with respective file processoe amd tree objects.
 			Runnable populateThread = new PopulateThread(file, tree);
-			// Thread is created with populateThread object.
 			thread[i] = new Thread(populateThread,"Thread - "+String.valueOf(i+1));
 		}
-		// starts threads
+		// start and join threads
+		try{
 			for(int i = 0; i < NUM_THREADS; i++ ){
 				thread[i].start();
-			}
-		
-		// joins threads
-		try{// exception should be catched for join operation
-			for(int i = 0; i < NUM_THREADS; i++ ){
 				thread[i].join();
 			}
 		}catch(Exception ex){
@@ -45,27 +37,22 @@ public class CreateWorkers{
 	    	ex.printStackTrace();
 	    	System.exit(0);
 		}
-
 		file.closeFile();
+		// System.out.println("Distinct s " +tree.getdistinctwordCount() +" wrd is = "+tree.getWordCount());
 		// prints the stored words(nodes) for testing only.
- 		tree.printNodes();
+ 		// tree.printNodes();
 	}
 
 	public void startDeleteWorkers(int NUM_THREADS,String[] deleteWords){
-		// Create threads
 		// System.out.println(String.join(" ",deleteWords));
 		for(int i = 0; i < NUM_THREADS; i++ ){
 			Runnable deleteThread = new DeleteThread(tree,deleteWords[i]);
 			thread[i] = new Thread(deleteThread,"Thread - "+String.valueOf(i+1));
 		}
-		// starts threads
+		// start and join threads
+		try{
 			for(int i = 0; i < NUM_THREADS; i++ ){
 				thread[i].start();
-			}
-		
-		// joins threads
-		try{// exception should be catched for join operation
-			for(int i = 0; i < NUM_THREADS; i++ ){
 				thread[i].join();
 			}
 		}catch(Exception ex){
@@ -73,5 +60,6 @@ public class CreateWorkers{
 	    	ex.printStackTrace();
 	    	System.exit(0);
 		}
+		System.out.println("Distinct s " +tree.getdistinctwordCount() +" wrd is = "+tree.getWordCount());
 	}
 }
