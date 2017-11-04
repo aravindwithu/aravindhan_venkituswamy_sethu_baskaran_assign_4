@@ -31,13 +31,9 @@ public class TreeBuilder {
 		}
 	}
 
-	// public int getdistinctwordCount(){
-	// 	return distinctwordCount;
-	// }
-
-	// public int getWordCount(){
-	// 	return wordCount;
-	// }
+	public Node getRoot(){
+		return root;
+	}	
 
 	/**
 	* insertNode private method.
@@ -51,7 +47,6 @@ public class TreeBuilder {
 	private Node insertNode(Node root, String word){
 		if(root == null){
 			root = new Node(word);
-			distinctwordCount++;
 			return root;
 		}
 
@@ -61,9 +56,11 @@ public class TreeBuilder {
        	}else{
        		int cmpResult =  word.compareTo(root.getWord());
         	if (0 > cmpResult){
+        		// System.out.println("Sett left");
 	            root.setLeftChild(insertNode(root.getLeftChild(), word));
 	        }
 	    	else if (0 < cmpResult){
+	    		// System.out.println("Sett right");
 	            root.setRightChild(insertNode(root.getRightChild(), word));
         	}
         	return root;

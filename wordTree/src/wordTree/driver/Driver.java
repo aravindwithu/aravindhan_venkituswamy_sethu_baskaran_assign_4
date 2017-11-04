@@ -1,5 +1,6 @@
 package wordTree.driver;
 
+import wordTree.WordCount;
 import wordTree.store.Results;
 import wordTree.myTree.TreeBuilder;
 import wordTree.threadMgmt.CreateWorkers;
@@ -87,8 +88,10 @@ public class Driver {
 			CreateWorkers workers = new CreateWorkers(file,results);
 			workers.startPopulateWorkers(NUM_THREADS);
 			workers.startDeleteWorkers(NUM_THREADS,deleteStr);
-		 
-		    System.out.println("Output files generated successfully.");
+		 	WordCount wordCount = new WordCount(workers.getTree());
+		 	wordCount.getWordCount();
+		 	wordCount.display();
+		    // System.out.println("Output files generated successfully.");
 	    }
 	    catch(Exception ex){
 	    	System.err.println(ex.getMessage());// prints the error message.

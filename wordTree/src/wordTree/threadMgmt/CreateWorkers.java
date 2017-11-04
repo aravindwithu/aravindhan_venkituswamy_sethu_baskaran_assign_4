@@ -43,6 +43,10 @@ public class CreateWorkers{
  		// tree.printNodes();
 	}
 
+	public TreeBuilder getTree(){
+		return tree;
+	}
+
 	public void startDeleteWorkers(int NUM_THREADS,String[] deleteWords){
 		// System.out.println(String.join(" ",deleteWords));
 		for(int i = 0; i < NUM_THREADS; i++ ){
@@ -60,6 +64,5 @@ public class CreateWorkers{
 	    	ex.printStackTrace();
 	    	System.exit(0);
 		}
-		System.out.println("Distinct s " +tree.getdistinctwordCount() +" wrd is = "+tree.getWordCount());
 	}
 }
