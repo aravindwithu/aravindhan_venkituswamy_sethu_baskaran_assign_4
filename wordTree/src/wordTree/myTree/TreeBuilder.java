@@ -93,10 +93,11 @@ public class TreeBuilder {
 		Node currentNode = root;
 		
 		while(currentNode != null)	{
-			if(currentNode.getWord().equals(word)){
+			int cmpResult = currentNode.getWord().compareToIgnoreCase(word);
+			if(cmpResult == 0){
 				return currentNode;
 			}
-			else if(currentNode.getWord().compareTo(word) < 0){
+			else if(cmpResult < 0){
 				currentNode = currentNode.getRightChild();
 			}
 			else{
