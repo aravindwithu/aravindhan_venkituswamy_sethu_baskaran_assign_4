@@ -39,7 +39,7 @@ public class Results implements FileDisplayInterface,StdoutDisplayInterface{
 	// Writes a string to output file
 	public void writeSchedulesToFile(String string){
 		try{
-			MyLogger.writeMessage(string,MyLogger.DebugLevel.FILE_WRITE);
+			// MyLogger.writeMessage(string,MyLogger.DebugLevel.FILE_WRITE);
 			bwriter.write(string);
 			bwriter.newLine();
 		}catch(Exception e){

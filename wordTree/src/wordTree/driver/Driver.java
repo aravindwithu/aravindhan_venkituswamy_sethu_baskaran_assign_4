@@ -102,7 +102,11 @@ public class Driver {
 		 	ArrayList<String> list = results.getresultStore();
 		 	for(String string : list){
 		 		results.writeSchedulesToFile(string);
+		 		if(args[4].equals("2")){
+			 		results.writeToScreen(string);
+			 	}
 		 	}
+
 		 	results.closeFile();
 	    }
 	    catch(Exception ex){

@@ -25,7 +25,9 @@ public class CreateWorkers{
 		thread = new Thread[NUM_THREADS];
 		for(int i = 0; i < NUM_THREADS; i++ ){
 			Runnable populateThread = new PopulateThread(file, tree);
-			thread[i] = new Thread(populateThread,"Thread - "+String.valueOf(i+1));
+			String threadName = "Thread - "+String.valueOf(i+1);
+			thread[i] = new Thread(populateThread,threadName);
+			MyLogger.writeMessage("Populate: "+threadName+" created",MyLogger.DebugLevel.THREAD_CREATE);
 		}
 		// start and join threads
 		try{
@@ -40,9 +42,6 @@ public class CreateWorkers{
 	    	System.exit(0);
 		}
 		file.closeFile();
-		// System.out.println("Distinct s " +tree.getdistinctwordCount() +" wrd is = "+tree.getWordCount());
-		// prints the stored words(nodes) for testing only.
- 		// tree.printNodes();
 	}
 
 	public TreeBuilder getTree(){
@@ -50,10 +49,11 @@ public class CreateWorkers{
 	}
 
 	public void startDeleteWorkers(int NUM_THREADS,String[] deleteWords){
-		// System.out.println(String.join(" ",deleteWords));
 		for(int i = 0; i < NUM_THREADS; i++ ){
 			Runnable deleteThread = new DeleteThread(tree,deleteWords[i]);
-			thread[i] = new Thread(deleteThread,"Thread - "+String.valueOf(i+1));
+			String threadName = "Thread - "+String.valueOf(i+1);
+			thread[i] = new Thread(deleteThread,threadName);
+			MyLogger.writeMessage("Delete: "+threadName+" created",MyLogger.DebugLevel.THREAD_CREATE);
 		}
 		// start and join threads
 		try{

@@ -29,7 +29,6 @@ public class WordCount{
 		if(node == null){
 			return;
 		}
-		// System.out.println(node.getWord());
 		getWordCount(node.getLeftChild());
 		distinctWords++;
 		words += node.getNumOfOccurence();
@@ -38,7 +37,6 @@ public class WordCount{
 	}
 
 	public void saveCount(Results results){
-		// System.out.println("Words:"+words+", distinct:"+distinctWords+", chars:"+characters);
 		results.storeNewResult("The total number of words: "+words);
 		results.storeNewResult("The total number of characters: "+characters);
 		results.storeNewResult("The total number of distinct words: "+distinctWords);
