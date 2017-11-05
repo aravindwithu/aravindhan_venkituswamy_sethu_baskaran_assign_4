@@ -25,7 +25,7 @@ public class WordCount{
 		getWordCount(root);
 	}
 
-	public void getWordCount(Node node){
+	private void getWordCount(Node node){
 		if(node == null){
 			return;
 		}

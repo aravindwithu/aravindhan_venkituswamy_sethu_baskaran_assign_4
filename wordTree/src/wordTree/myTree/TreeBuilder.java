@@ -51,12 +51,11 @@ public class TreeBuilder {
 			root = new Node(word);
 			return root;
 		}
-
-		if(word.equals(root.getWord())){
+		int cmpResult =  word.compareToIgnoreCase(root.getWord());
+		if(cmpResult == 0){
        		root.incrementCount();
         	return root;
        	}else{
-       		int cmpResult =  word.compareTo(root.getWord());
         	if (0 > cmpResult){
 	            root.setLeftChild(insertNode(root.getLeftChild(), word));
 	        }

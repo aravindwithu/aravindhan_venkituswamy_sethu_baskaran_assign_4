@@ -24,6 +24,10 @@ public class Driver {
 	   	// Object declared for MyLogger class.
 	    MyLogger myLogger;
 
+	    CreateWorkers workers;
+
+	    WordCount wordCount;
+
 	    try{
 	    	// command line validation for input file and output file respectively.
 	    	String inputFile = "", outputFile = "";
@@ -93,10 +97,10 @@ public class Driver {
 
 		    file = new FileProcessor(inputFile);				 
 			results = new Results(outputFile);
-			CreateWorkers workers = new CreateWorkers(file,results);
+			workers = new CreateWorkers(file);
 			workers.startPopulateWorkers(NUM_THREADS);
 			workers.startDeleteWorkers(NUM_THREADS,deleteStr);
-		 	WordCount wordCount = new WordCount(workers.getTree());
+		 	wordCount = new WordCount(workers.getTree());
 		 	wordCount.getWordCount();
 		 	wordCount.saveCount(results);
 		 	ArrayList<String> list = results.getresultStore();
@@ -106,7 +110,7 @@ public class Driver {
 			 		results.writeToScreen(string);
 			 	}
 		 	}
-
+		 	list = null;
 		 	results.closeFile();
 	    }
 	    catch(Exception ex){
@@ -119,6 +123,8 @@ public class Driver {
 		    results = null;
 		    file = null;
 		    writer = null;
+		    workers = null;
+		    wordCount = null;
 	    }
 	}
 }

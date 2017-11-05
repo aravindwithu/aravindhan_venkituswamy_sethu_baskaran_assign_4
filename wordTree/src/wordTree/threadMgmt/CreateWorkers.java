@@ -9,14 +9,12 @@ import java.util.ArrayList;
 
 public class CreateWorkers{
 	private FileProcessor file;
-	private Results results;
 	private TreeBuilder tree;
 	private Thread thread[];
 
-	public CreateWorkers(FileProcessor fileIn, Results results){
+	public CreateWorkers(FileProcessor fileIn){
 		// Required objects are assigned/intialized in the costructor.
 		file = fileIn;
-		results = results;
 		tree = new TreeBuilder();
 		MyLogger.writeMessage("Inside CreateWorkers constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 	}
