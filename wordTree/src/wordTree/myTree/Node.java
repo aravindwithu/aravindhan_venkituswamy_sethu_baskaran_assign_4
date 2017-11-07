@@ -9,6 +9,11 @@ public class Node{
 	private Node leftChild;
 	private Node rightChild;
 
+	/**
+	* Node constructor.
+	* Gets the new word.
+	* Initializes required objects for respective classes. 
+	*/
 	public Node(String newWord){
 		word = newWord;
 		wordLength = word.length();

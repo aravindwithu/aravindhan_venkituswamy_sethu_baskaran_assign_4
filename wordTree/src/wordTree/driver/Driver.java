@@ -2,7 +2,6 @@ package wordTree.driver;
 
 import wordTree.WordCount;
 import wordTree.store.Results;
-import wordTree.myTree.TreeBuilder;
 import wordTree.threadMgmt.CreateWorkers;
 import wordTree.util.FileProcessor;
 import wordTree.util.MyLogger;
@@ -13,8 +12,6 @@ public class Driver {
 
 	public static void main(String[] args) 
 	{
-		// Object declared for TreeBuilder class.
-	    TreeBuilder treeBuilder;
 	    // Object declared for Results class (Original).
 	    Results results;
 	    // Object declared for FileProcessor class.
@@ -23,9 +20,9 @@ public class Driver {
 	    PrintWriter writer;
 	   	// Object declared for MyLogger class.
 	    MyLogger myLogger;
-
+		// Object declared for CreateWorkers class.
 	    CreateWorkers workers;
-
+		// Object declared for WordCount class.
 	    WordCount wordCount;
 
 	    try{
@@ -48,7 +45,7 @@ public class Driver {
 		    		throw new Exception("Please provide output file.");
 		    	}
 
-		    	String threadCheck = "123";
+		    	String threadCheck = "123";// validates number of threads value is between 1 and 3.
 		    	if(!args[2].equals("${arg2}") && !args[2].equals("") && (threadCheck.contains(args[2]))){// validates 3rd number of threads argument value.
 					try{
 						NUM_THREADS = Integer.parseInt(args[2]);
@@ -75,7 +72,7 @@ public class Driver {
 		    		throw new Exception("Please provide delete words.");
 		    	}
 
-		    	String arg4 = "01234";
+		    	String arg4 = "01234";// validates logger value is between 0 and 4.
 				if(args[4].equals("${arg4}") || args[4].equals("") || args[4].length() != 1 || (!arg4.contains(args[4]))){
 					throw new Exception("Logger value is incorrect");
 				}
@@ -98,10 +95,13 @@ public class Driver {
 		    file = new FileProcessor(inputFile);				 
 			results = new Results(outputFile);
 			workers = new CreateWorkers(file);
+			// start populate workers is called
 			workers.startPopulateWorkers(NUM_THREADS);
+			// start delete workers is called
 			workers.startDeleteWorkers(NUM_THREADS,deleteStr);
 		 	wordCount = new WordCount(workers.getTree());
 		 	wordCount.getWordCount();
+		 	// results are stored and printed/writtern to files
 		 	wordCount.saveCount(results);
 		 	ArrayList<String> list = results.getresultStore();
 		 	for(String string : list){
@@ -119,7 +119,6 @@ public class Driver {
 	    	System.exit(0);
 	    }
 	    finally{// Clears all the objects created.
-		    treeBuilder = null;
 		    results = null;
 		    file = null;
 		    writer = null;

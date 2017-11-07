@@ -12,6 +12,10 @@ public class CreateWorkers{
 	private TreeBuilder tree;
 	private Thread thread[];
 
+	/**
+	* CreateWorkers constructor.
+	* Gets the file object and initializes the required objects for respective class.
+	*/
 	public CreateWorkers(FileProcessor fileIn){
 		// Required objects are assigned/intialized in the costructor.
 		file = fileIn;
@@ -19,6 +23,12 @@ public class CreateWorkers{
 		MyLogger.writeMessage("Inside CreateWorkers constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 	}
 
+	/**
+	* startPopulateWorkers method
+	* Creates the given number of threads, starts and joins the threads.
+	* Each thread is created with the help of PopulateThread class using runnable interface.
+	* Used to insert the word as nodes in tree from file.
+	*/
 	public void startPopulateWorkers(int NUM_THREADS){
 		thread = new Thread[NUM_THREADS];
 		for(int i = 0; i < NUM_THREADS; i++ ){
@@ -42,10 +52,20 @@ public class CreateWorkers{
 		file.closeFile();
 	}
 
+	/**
+	* returns tree object.
+	* @return TreeBuilder
+	*/
 	public TreeBuilder getTree(){
 		return tree;
 	}
 
+	/**
+	* startDeleteWorkers method
+	* Creates the given number of threads, starts and joins the threads.
+	* Each thread is created with the help of DeleteThread class using runnable interface.
+	* Used to delete the word as nodes in tree from given delete argument string.
+	*/
 	public void startDeleteWorkers(int NUM_THREADS,String[] deleteWords){
 		for(int i = 0; i < NUM_THREADS; i++ ){
 			Runnable deleteThread = new DeleteThread(tree,deleteWords[i]);

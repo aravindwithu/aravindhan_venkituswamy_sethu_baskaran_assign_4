@@ -14,6 +14,10 @@ public class Results implements FileDisplayInterface,StdoutDisplayInterface{
 	private ArrayList<String> resultStore = null;
 	private BufferedWriter bwriter = null;
 	
+	/**
+	* Constructor for Results class.
+	* Gets the file object and initializes the required objects for respective class.
+	*/
 	public Results(String file){
 		this.resultStore = new ArrayList<String>();
 		try{

@@ -12,6 +12,10 @@ public class WordCount{
 	int characters;
 	int distinctWords;
 
+	/**
+	* WordCount constructor.
+	* Gets the tree object and initializes the required objects for respective class.
+	*/
 	public WordCount(TreeBuilder treeIn){
 		tree = treeIn;
 		words = 0;
@@ -20,11 +24,20 @@ public class WordCount{
 		MyLogger.writeMessage("Inside WordCount constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 	}
 
+	/**
+	* Public getWordCount method.
+	* In turn this will call the private getWordCount with root parameter.
+	*/
 	public void getWordCount(){
 		Node root = tree.getRoot();
 		getWordCount(root);
 	}
 
+	/**
+	* Private getWordCount method.
+	* Uses inorder traversal of the tree to calculate number of words, number of charectors, 
+	* and number of distinctWords.
+	*/
 	private void getWordCount(Node node){
 		if(node == null){
 			return;
@@ -36,6 +49,11 @@ public class WordCount{
 		getWordCount(node.getRightChild());
 	}
 
+	/**
+	* saveCount method.
+	* stores the required details like number of words, number of charectors, 
+	* and number of distinctWords to result object. 
+	*/
 	public void saveCount(Results results){
 		results.storeNewResult("The total number of words: "+words);
 		results.storeNewResult("The total number of characters: "+characters);

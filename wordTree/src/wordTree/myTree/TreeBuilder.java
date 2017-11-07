@@ -32,7 +32,10 @@ public class TreeBuilder {
 	    	System.exit(0);
 		}
 	}
-
+	/**
+	* returns root node of the tree.
+	* @return Node (root).
+	*/
 	public Node getRoot(){
 		return root;
 	}	
@@ -89,6 +92,10 @@ public class TreeBuilder {
 	 	}
 	 }
 
+	/**
+	* returns the Node for the given word.
+	* @return Node
+	*/
 	public Node getNode(String word){
 		Node currentNode = root;
 		
@@ -107,6 +114,11 @@ public class TreeBuilder {
 		return null;
 	}
 
+	/**
+	* deleteNode public method.
+	* Deletes the node from tree (Only updates and changes number of occurences).
+	* @param word
+	*/
 	public void deleteWord(String word){
 		synchronized(this){
 			if(root == null){
