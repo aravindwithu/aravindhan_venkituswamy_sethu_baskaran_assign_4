@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.File;	
 
 public class FileProcessor{
-private BufferedReader file; // BufferedReader object to read from file.
+	private BufferedReader file; // BufferedReader object to read from file.
 	private boolean isFileOpen = false;//  to maintain whether the file is open or not state.
 	/**
 	* FileProcessor constructor to intialize FileProcessor class.

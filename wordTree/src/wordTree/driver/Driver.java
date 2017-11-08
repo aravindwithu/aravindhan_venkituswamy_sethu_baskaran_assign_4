@@ -5,7 +5,6 @@ import wordTree.store.Results;
 import wordTree.threadMgmt.CreateWorkers;
 import wordTree.util.FileProcessor;
 import wordTree.util.MyLogger;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class Driver {
@@ -16,10 +15,6 @@ public class Driver {
 	    Results results;
 	    // Object declared for FileProcessor class.
 	    FileProcessor file;
-	    // Object declared for PrintWriter class.
-	    PrintWriter writer;
-	   	// Object declared for MyLogger class.
-	    MyLogger myLogger;
 		// Object declared for CreateWorkers class.
 	    CreateWorkers workers;
 		// Object declared for WordCount class.
@@ -58,11 +53,9 @@ public class Driver {
 		    	else{
 		    		throw new Exception("Please provide number of threads.");
 		    	}
-		    	// CHeck if empty???
 		    	if(!args[3].equals("${arg3}") && !args[3].equals("")){// validates 4th delete words argument value.
 					String[] arg3 = args[3].split(" ");
 					if(arg3.length == NUM_THREADS){
-						// deleteStr = String.join(" ",args[3]);
 						deleteStr = arg3;
 					}else{
 						throw new Exception("Number of threads not equal to delete words.");
@@ -121,7 +114,6 @@ public class Driver {
 	    finally{// Clears all the objects created.
 		    results = null;
 		    file = null;
-		    writer = null;
 		    workers = null;
 		    wordCount = null;
 	    }

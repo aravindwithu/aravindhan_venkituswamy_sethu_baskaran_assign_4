@@ -126,9 +126,7 @@ public class TreeBuilder {
 			}
 			Node node = getNode(word);
 			if(node != null){
-				System.out.println("Node is ="+node.getWord() + ":"+node.getNumOfOccurence());
 				node.decrementCount();
-				System.out.println("Afer delete:" +node.getNumOfOccurence());
 			}			
 		}
 	}
