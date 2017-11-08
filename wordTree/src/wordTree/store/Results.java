@@ -17,6 +17,7 @@ public class Results implements FileDisplayInterface,StdoutDisplayInterface{
 	/**
 	* Constructor for Results class.
 	* Gets the file object and initializes the required objects for respective class.
+	* @param file (FileProcessor).
 	*/
 	public Results(String file){
 		this.resultStore = new ArrayList<String>();

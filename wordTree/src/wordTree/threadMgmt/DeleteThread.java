@@ -11,6 +11,8 @@ public class DeleteThread implements Runnable{
 	/**
 	* PopulateThread constructor.
 	* Gets the file, tree object and initializes the required objects for respective class.
+	* @param treeIn (TreeBuilder)
+	* @param wordIn (String)
 	*/
 	public DeleteThread(TreeBuilder treeIn,String wordIn){
 		tree = treeIn;

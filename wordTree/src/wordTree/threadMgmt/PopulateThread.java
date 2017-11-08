@@ -12,6 +12,8 @@ public class PopulateThread implements Runnable{
 	/**
 	* PopulateThread constructor.
 	* Gets the file, tree object and initializes the required objects for respective class.
+	* @param fileIn (FileProcessor)
+	* @param treeIn (TreeBuilder)
 	*/
 	public PopulateThread(FileProcessor fileIn, TreeBuilder treeIn){
 		// The respective file object and tree object are assigned.

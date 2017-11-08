@@ -15,6 +15,7 @@ public class WordCount{
 	/**
 	* WordCount constructor.
 	* Gets the tree object and initializes the required objects for respective class.
+	* @param treeIn (TreeBuilder)
 	*/
 	public WordCount(TreeBuilder treeIn){
 		tree = treeIn;
@@ -37,6 +38,7 @@ public class WordCount{
 	* Private getWordCount method.
 	* Uses inorder traversal of the tree to calculate number of words, number of charectors, 
 	* and number of distinctWords.
+	* @param node (Node)
 	*/
 	private void getWordCount(Node node){
 		if(node == null){
@@ -52,7 +54,8 @@ public class WordCount{
 	/**
 	* saveCount method.
 	* stores the required details like number of words, number of charectors, 
-	* and number of distinctWords to result object. 
+	* and number of distinctWords to result object.
+	* @param results (Results)
 	*/
 	public void saveCount(Results results){
 		results.storeNewResult("The total number of words: "+words);

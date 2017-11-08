@@ -12,7 +12,8 @@ public class Node{
 	/**
 	* Node constructor.
 	* Gets the new word.
-	* Initializes required objects for respective classes. 
+	* Initializes required objects for respective classes.
+	* @param newWord (String)
 	*/
 	public Node(String newWord){
 		word = newWord;
@@ -55,6 +56,10 @@ public class Node{
 		numOfOccurence++;
 	}
 
+	/**
+	* decrementCount method.
+	* decrements numOfOccurence by 1. 
+	*/
 	public void decrementCount(){
 		if(numOfOccurence > 0){
 			numOfOccurence--;	

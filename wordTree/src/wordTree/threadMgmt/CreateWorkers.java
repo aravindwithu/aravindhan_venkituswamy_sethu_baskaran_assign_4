@@ -15,6 +15,7 @@ public class CreateWorkers{
 	/**
 	* CreateWorkers constructor.
 	* Gets the file object and initializes the required objects for respective class.
+	* @param file (FileProcessor).
 	*/
 	public CreateWorkers(FileProcessor fileIn){
 		// Required objects are assigned/intialized in the costructor.
@@ -28,6 +29,7 @@ public class CreateWorkers{
 	* Creates the given number of threads, starts and joins the threads.
 	* Each thread is created with the help of PopulateThread class using runnable interface.
 	* Used to insert the word as nodes in tree from file.
+	* @param NUM_THREADS (int).
 	*/
 	public void startPopulateWorkers(int NUM_THREADS){
 		thread = new Thread[NUM_THREADS];
@@ -65,6 +67,8 @@ public class CreateWorkers{
 	* Creates the given number of threads, starts and joins the threads.
 	* Each thread is created with the help of DeleteThread class using runnable interface.
 	* Used to delete the word as nodes in tree from given delete argument string.
+	* @param NUM_THREADS (int).
+	* @param deleteWords (String[]).
 	*/
 	public void startDeleteWorkers(int NUM_THREADS,String[] deleteWords){
 		for(int i = 0; i < NUM_THREADS; i++ ){

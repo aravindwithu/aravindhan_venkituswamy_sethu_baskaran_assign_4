@@ -31,13 +31,6 @@ public class TreeBuilder {
 	    	ex.printStackTrace();// prints stack trace.
 	    	System.exit(0);
 		}
-	}
-	/**
-	* returns root node of the tree.
-	* @return Node (root).
-	*/
-	public Node getRoot(){
-		return root;
 	}	
 
 	/**
@@ -68,32 +61,18 @@ public class TreeBuilder {
         	return root;
        	}
 	}
-	
+
 	/**
-	* printNodes public method.
-	* To write tree data to result array list.
-	* @param results.
+	* returns root node of the tree.
+	* @return Node (root).
 	*/
-	public void printNodes(){
-		printNodes(root);
+	public Node getRoot(){
+		return root;
 	}
 
 	/**
-	* printNodes private method.
-	* To write tree data to result array list.
-	* @param currentNode
-	* @param result
-	*/
-	private void printNodes(Node currentNode){
-	 	if(currentNode != null){
-	 		printNodes(currentNode.getLeftChild());
-	 		System.out.println(currentNode.getWord() + "->" + currentNode.getNumOfOccurence());		
-	 		printNodes(currentNode.getRightChild());
-	 	}
-	 }
-
-	/**
 	* returns the Node for the given word.
+	* @param word (String)
 	* @return Node
 	*/
 	public Node getNode(String word){
@@ -117,7 +96,7 @@ public class TreeBuilder {
 	/**
 	* deleteNode public method.
 	* Deletes the node from tree (Only updates and changes number of occurences).
-	* @param word
+	* @param word (String)
 	*/
 	public void deleteWord(String word){
 		synchronized(this){
