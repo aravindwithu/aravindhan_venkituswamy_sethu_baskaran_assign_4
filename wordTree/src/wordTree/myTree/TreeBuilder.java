@@ -47,7 +47,7 @@ public class TreeBuilder {
 			root = new Node(word);
 			return root;
 		}
-		int cmpResult =  word.compareToIgnoreCase(root.getWord());
+		int cmpResult =  word.compareTo(root.getWord());
 		if(cmpResult == 0){
        		root.incrementCount();
         	return root;
@@ -79,7 +79,7 @@ public class TreeBuilder {
 		Node currentNode = root;
 		
 		while(currentNode != null)	{
-			int cmpResult = currentNode.getWord().compareToIgnoreCase(word);
+			int cmpResult = currentNode.getWord().compareTo(word);
 			if(cmpResult == 0){
 				return currentNode;
 			}
